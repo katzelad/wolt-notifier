@@ -1,1 +1,1 @@
-Notifies when a Wolt restaurant is online.
+A Firefox extension which notifies you when a Wolt restaurant is taking orders.
