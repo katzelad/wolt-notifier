@@ -56,6 +56,7 @@ browser.tabs.onUpdated.addListener(async (_tabId, { url }, tab) => {
 browser.notifications.onClicked.addListener(async notifId => {
     tabs = await getRestaurantTabs(notifId)
     if (tabs.length) {
+        browser.tabs.reload(tabs[0].id)
         browser.tabs.update(tabs[0].id, { active: true })
         browser.windows.update(tabs[0].windowId, { focused: true })
     } else {
