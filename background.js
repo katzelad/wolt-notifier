@@ -36,10 +36,10 @@ browser.pageAction.onClicked.addListener(async tab => {
 
 browser.alarms.onAlarm.addListener(async alarmInfo => {
     console.log('alarm ' + alarmInfo.name)
-    const { results: [{ name: [{ value: name }], online }] } = await (await fetch('https://restaurant-api.wolt.com/v3/venues/slug/' + alarmInfo.name)).json()
+    const { venue: { online } } = await (await fetch('https://consumer-api.wolt.com/order-xp/web/v1/venue/slug/' + alarmInfo.name + "/dynamic/")).json()
     if (online) {
         console.log('online')
-        browser.notifications.create(alarmInfo.name, { type: 'basic', iconUrl: 'icon.png', title: 'Wolt Notifier', message: name + ' is open for orders' })
+        browser.notifications.create(alarmInfo.name, { type: 'basic', iconUrl: 'icon.png', title: 'Wolt Notifier', message: 'The restaurant is open for orders' })
         setIconState(alarmInfo.name, false)
     } else {
         console.log('offline')
